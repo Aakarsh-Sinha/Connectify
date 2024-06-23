@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -13,10 +13,10 @@ const connectDB = async () => {
       useCreateIndex: true,
       useFindAndModify: false,
     });
-    console.log("MongoDB connected successfully");
+    console.log('MongoDB connected successfully');
   } catch (err) {
-    console.error("MongoDB connection error:", err.message);
-    process.exit(1);
+    console.error('MongoDB connection error:', err.message);
+    process.exit(1); 
   }
 };
 
