@@ -7,6 +7,12 @@ dotenv.config();
 connectDB();
 
 const app = express();
+const cors=require('cors');
+const mainRouter=require('./routes/index.js');
+app.use(cors);
+app.use(express.json());
+
+app.use("/api",mainRouter);
 
 console.log(process.env.PORT);
 
