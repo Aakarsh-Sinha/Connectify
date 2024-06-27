@@ -1,5 +1,5 @@
-const mongoose=require("mongoose");
-const { userModel } = require("./userModel");
+import mongoose from 'mongoose';
+import { userModel } from './userModel.js';
 
 const postsSchema=new mongoose.Schema({
     userId:{
@@ -15,6 +15,10 @@ const postsSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    username:{
+        type:String,
+        required:true,
+    },
     image:{
         type:String,
         required:true
@@ -23,4 +27,4 @@ const postsSchema=new mongoose.Schema({
 
 const postsModel=mongoose.model("postsModel",postsSchema);
 
-module.exports=postsModel;
+export { postsModel };

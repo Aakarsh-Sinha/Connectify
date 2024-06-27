@@ -1,7 +1,7 @@
-const mongoose=require("mongoose");
+import mongoose from 'mongoose';
 
 const userSchema=new mongoose.Schema({
-    username:{
+    email:{
         type:String,
         required:true,
         unique:true,
@@ -16,12 +16,7 @@ const userSchema=new mongoose.Schema({
         required: true,
         minLength:6
     },
-    firstname:{
-        type:String,
-        required:true,
-        trim:true
-    },
-    lastname:{
+    username:{
         type:String,
         required:true,
         trim:true
@@ -29,6 +24,6 @@ const userSchema=new mongoose.Schema({
 
 });
 
-const userModel=mongoose.model("userModel",userSchema);
+const userModel = mongoose.model('userModel', userSchema);
 
-module.exports=userModel;
+export { userModel };
