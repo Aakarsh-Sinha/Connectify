@@ -1,17 +1,15 @@
-import React from 'react';
+import React from 'react'
 import Sidebarcomp from './Sidebarcomp';
-import { useNavigate } from "react-router-dom";
-function Sidebar({setActive}) {
-    
+import { useNavigate } from 'react-router-dom';
+function Bottombar({setActive}) {
     const navigate=useNavigate();
     const profile=async()=>{
         navigate(`/Personalprofile`);
     };
     return (
-    <>
-        <div className="hidden custom-950:flex p-[2vw] h-[100vh] w-[25vw] flex-col fixed">
-            <div className="text-4xl font-bold bg-gradient-to-br from-purple-500 to-indigo-500 text-purple p-[1vw] bg-clip-text text-transparent">Connectify</div>
-            <Sidebarcomp title={"Home"} icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+      <>
+        <div className='h-[10vh] w-full flex justify-between items-center p-[2.5vw] fixed bottom-0 bg-black custom-950:hidden'>
+        <Sidebarcomp title={"Home"} icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
             <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
             </svg>} setActive={setActive}/>
             <Sidebarcomp title={"Add Friends"} icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -34,16 +32,10 @@ function Sidebar({setActive}) {
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                     </svg>
                 </div>
-                <div className="w-[85%] justify-start">My Profile</div>
             </div>
-            <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={() => {
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("userId");
-                            navigate("/Signin");
-                        }}>Sign-Out</button>
         </div>
-    </>
+      </>
     );
-}
-
-export default Sidebar;
+  }
+  
+  export default Bottombar;

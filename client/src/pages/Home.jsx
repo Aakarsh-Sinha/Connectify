@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Bottombar from '../components/Bottombar';
 import '../black.css'
 import Sidebar from '../components/Sidebar';
 import Addfriend from '../components/Addfriend'
@@ -19,7 +19,7 @@ function Home(){
       case 'Add Friends':
         ActiveComponent = Addfriend;
         break;
-      case 'Send Request':
+      case 'Sent Requests':
         ActiveComponent = Sentrequests;
         break;
       case 'Pending Requests':
@@ -32,10 +32,11 @@ function Home(){
         ActiveComponent = Post;
     }
     return <>
-       <Navbar/>
+       
        <div className="flex w-[100vw]">
             <Sidebar setActive={setActive}/>
-            <div className="p-[1vw] w-[100vw]">
+            <Bottombar setActive={setActive}/>
+            <div className="ml-0 custom-950:ml-[25vw] custom-950:p-[1vw] w-[100vw] flex flex-col">
                 <ActiveComponent/>
             </div>
        </div>

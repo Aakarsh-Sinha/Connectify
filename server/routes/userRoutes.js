@@ -2,11 +2,13 @@ import express from 'express';
 import zod from 'zod';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+
 import { userModel } from '../models/userModel.js';
 import { postsModel } from '../models/postsModel.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { friendsModel } from '../models/friendsModel.js';
 import { requestsModel } from '../models/requestsModel.js';
+
 const router=express.Router();
 dotenv.config();
 
@@ -110,7 +112,6 @@ router.post('/createpost',authMiddleware,async(req,res)=>{
     try{
         const userId = req.headers.userid;
         console.log(userId);
-        //this part in middleware:
         if (!userId) {
             return res.status(401).json({ message: 'Unauthorized: User ID missing in headers' });
         }
@@ -135,16 +136,23 @@ router.post('/createpost',authMiddleware,async(req,res)=>{
 
 });
 
+router.get('/getusers', async (req, res) => {
+    try {
+        const userId = req.headers.userid; 
+        const users = await userModel.find({ _id: { $ne: userId } });
+
+        return res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 router.get('/getposts',authMiddleware,async(req,res)=>{
     try{
-        console.log("WE");
         const userId = req.headers.userid;
-        
-        console.log("WE");
         const friends=await friendsModel.findOne({
             userId:userId
         });
-        console.log("WE");
         if(!friends){
             return res.status(411).json({
                 message:"Add friends to see their posts on your feed"
@@ -160,31 +168,156 @@ router.get('/getposts',authMiddleware,async(req,res)=>{
         })
     };
 });
+router.get('/userposts',authMiddleware,async (req,res)=>{
+    try{
+        const userId=req.query.userId;
+        console.log(userId);
+        
+        const user = await userModel.findById(userId); 
+        const posts=await postsModel.find({
+            userId:userId
+        });
+        const friends=await friendsModel.findOne({
+            userId:userId
+        });
+        return res.status(200).json({
+            user:user,
+            posts:posts,
+            friends:friends.friends
+        });
+    }catch(error){
+        return res.status(500).json(error);
+    }
+})
+
+router.get('/sentrequests', async (req, res) => {
+    try {
+        const userId = req.headers.userid;
+        const requests = await requestsModel.find({ requests: userId }).populate('requests', 'username');
+        
+        const usernames = requests.map(request => request.requests.map(user => user.username)).flat();
+    
+        return res.status(200).json(usernames);
+    } catch (error) {
+      return res.status(500).json({
+        message: "Error"
+      });
+    }
+  });
+  
+router.get('/issent',authMiddleware,async(req,res)=>{
+    try{
+        const userId = req.headers.userid;
+        const {to}=req.query;
+        const sent=await requestsModel.findOne({
+            userId:to,
+            requests:userId
+        });
+        if(!sent){
+            return res.status(200).json(
+                "Add Friend"
+            );
+        };
+        if(sent){
+            return res.status(200).json(
+                "Sent")
+        }
+    }catch(error){
+        return res.status(500).json({
+            message:"error"
+        })
+    };
+});
 
 router.post('/sendrequest',authMiddleware,async(req,res)=>{
-    const userId = req.headers['userid'];
-    const {to}=req.body;
-    console.log(to);
-    const existingRequest = await requestsModel.findOne({
-        userId: to,
-        requests: userId
-    });
+    try{
+        const userId = req.headers['userid'];
+        const {to}=req.body;
+        console.log(to);
+        const existingRequest = await requestsModel.findOne({
+            userId: to,
+            requests: userId
+        });
 
-    if (existingRequest) {
-        return res.status(400).json({
-            message: "Request already sent"
+        const reqalr=await requestsModel.findOne({
+            userId:userId,
+            requests:to
+        });
+        if(reqalr){
+            return res.status(200).json({
+                message:"Alreadysent"
+            })
+        }
+
+        if (existingRequest) {
+            return res.status(400).json({
+                message: "Request already sent"
+            });
+        };
+
+        console.log("hello");
+        await requestsModel.updateOne(
+            { userId: to },
+            { $push: { requests: userId } }
+        );
+        return res.status(200).json({
+            message:"request sent successfully"
+        })    
+    }catch(error){
+        return res.json({
+            message:error
         });
     }
 
-    await requestsModel.updateOne(
-        { userId: to },
-        { $push: { requests: userId } }
-    );
-    return res.status(200).json({
-        message:"request sent successfully"
-    })
+});
+router.get('/getfriends',authMiddleware,async(req,res)=>{
+    try{
+        const userId=req.headers.userid;
+        const friends=await friendsModel.findOne({
+            userId:userId
+        }).populate('friends','username _id');
+        if(!friends){
+            return res.status(200).json({
+                message:"You have no friends"
+            })
+        }
+        const friendDetails = friends.friends.map(user => ({ userId: user._id, username: user.username }));
+        return res.status(200).json(friendDetails);
+    }catch(error){
+        return res.status(500).json(error)
+    }
+})
+router.get('/isfriend',authMiddleware,async(req,res)=>{
+    try{
+        const userId=req.headers['userid'];
+        const {to}=req.query;
+        
+        const isfriend=await friendsModel.findOne({
+            userId:userId,
+            friends:to
+        });
+        if(isfriend){
+            return res.status(200).json("Added");
+        }
+        if(!isfriend){
+            return res.status(200).json("Add Friend");
+        }
+    }catch(error){
+        return res.json({message:error});
+    }
+
 });
 
+router.get('/receivedrequests',async (req,res)=>{
+    try{
+        const userId=req.headers.userid;
+        const userRequests = await requestsModel.findOne({ userId: userId }).populate('requests', 'username _id');
+        const userDetails = userRequests.requests.map(user => ({ userId: user._id, username: user.username }));
+        return res.status(200).json(userDetails);
+    }catch(error){
+        return res.status(500).json({message:error});
+    }
+})
 router.post('/acceptrequest', authMiddleware, async (req, res) => {
     try {
         const userId = req.headers['userid']; 
