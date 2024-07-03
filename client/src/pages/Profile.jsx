@@ -32,7 +32,7 @@ function Profile(){
                 setLoading(false);
             }
         })();
-    });
+    },[searchParams]);
     if(loading){
       return <div>{loading}</div>
     }
