@@ -1,5 +1,5 @@
 import express from 'express';
-import zod from 'zod';
+import zod, { date } from 'zod';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
@@ -8,7 +8,7 @@ import { postsModel } from '../models/postsModel.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { friendsModel } from '../models/friendsModel.js';
 import { requestsModel } from '../models/requestsModel.js';
-
+import { messageModel } from '../models/messageModel.js';
 const router=express.Router();
 dotenv.config();
 
@@ -366,5 +366,50 @@ router.post('/acceptrequest', authMiddleware, async (req, res) => {
         return res.status(500).json({ message: 'Error accepting request' });
     }
 });
+
+router.get('/messages',authMiddleware, async (req,res)=>{
+    try{
+        const userId=req.headers.userid;
+        const friendId=req.query.friendId;
+        const messages=await messageModel.find({
+            $or:[
+                {
+                    sender:userId,
+                    receiver:friendId
+                },
+                {
+                    sender:friendId,
+                    receiver:userId
+                }
+            ]
+        });
+       
+        return res.status(200).json(messages);
+
+    }catch(error){
+        return res.status(500).json(error);
+    }
+});
+
+router.post('/sendmessage',authMiddleware,async (req,res)=>{
+    try{
+        const userId=req.headers.userid;
+        const friendId=req.body.friendId;
+        const message=req.body.message;
+
+        const newmessage=await messageModel.create({
+            sender:userId,
+            receiver:friendId,
+            message:message,
+            timestamp:Date.now()
+        });
+        return res.status(200).json({
+            message:"Message sent"
+        })
+    }catch(error){
+        return res.status(500).json(error);
+    }
+})
+
 
 export default router;

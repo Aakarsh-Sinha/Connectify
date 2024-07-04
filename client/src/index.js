@@ -11,6 +11,7 @@ import Home from './pages/Home.jsx';
 import Addfriend from './components/Addfriend.jsx';
 import Myfriends from './components/Myfriends.jsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Messages from './pages/Messages.jsx';
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,11 @@ const router = createBrowserRouter([
     element: <Sentrequests />,
     errorElement: <div>404</div>,
   },
+  {
+    path:'Messages',
+    element:<Messages/>,
+    errorElement:<div>404</div>
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
