@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 import { userModel } from "./userModel.js";
 
+const likeSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: userModel,
+    required: true,
+  },
+});
+
 const commentSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -31,6 +39,7 @@ const postsSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  likedBy: [likeSchema], // Array to store users who liked the post
   caption: {
     type: String,
     required: true,
