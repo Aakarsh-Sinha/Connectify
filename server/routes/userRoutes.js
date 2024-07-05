@@ -105,43 +105,6 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-// router.post('/signin',async(req,res)=>{
-
-//     try{
-//         const {success}=signinbody.safeParse(req.body);
-//         if(!success){
-//             return res.status(411).json({
-//                 message:"incorrect input"
-//             })
-//         }
-//         const user=await userModel.findOne({
-//             username:req.body.username,
-//             password:req.body.password
-//         });
-//         const userId=user._id;
-//         if(user){
-//             const token=jwt.sign({
-//                 userId:user._id
-//             },jwtsecret);
-
-//             res.json({
-//                 token:token,
-//                 userId:userId
-//             })
-//             return;
-//         }
-
-//         res.status(411).json({
-//             message:"Error"
-//         })
-//     }catch(error){
-//         res.status(500).json({
-//             message:"error while signing in"
-//         })
-//     }
-
-// });
-
 router.post("/createpost", authMiddleware, async (req, res) => {
   try {
     const userId = req.headers.userid;
