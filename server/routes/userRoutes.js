@@ -120,14 +120,19 @@ router.post("/createpost", authMiddleware, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+
     const { base64 } = req.body;
+
+    // Create a new post with initialized comments array
     const newpost = await postsModel.create({
       userId: userId,
       likes: 0,
       caption: req.body.caption,
       username: user.username,
       image: base64,
+      comments: [], // Initialize comments as an empty array
     });
+
     res.status(201).json({ message: "Post created successfully" });
   } catch (error) {
     res
