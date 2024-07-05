@@ -8,7 +8,6 @@ function Signup(){
     
     const [email,setEmail]=useState("");
     const [username,setUsername]=useState("");
-    const [name,setName]=useState("");
     const [password,setPassword]=useState("");
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
@@ -19,28 +18,28 @@ function Signup(){
                 <div>Enter your details to get started!</div>
                 <div className="flex flex-col w-full">
                     <p>E-Mail</p>
-                    <input className="border border-slate-500 rounded-md h-12" placeholder="E-mail" onChange={e=>{
+                    <input className="border border-slate-500 rounded-md h-12 text-black" placeholder="E-mail" onChange={e=>{
                         setEmail(e.target.value);
                         console.log(e.target.value);
                     }}/>
                 </div>
                 <div className="flex flex-col w-full">
                     <p>User Name</p>
-                    <input className="border border-slate-500 rounded-md h-12" onChange={e=>{
+                    <input className="border border-slate-500 rounded-md h-12 text-black" onChange={e=>{
                         setUsername(e.target.value);
                         console.log(e.target.value);
                     }}/>
                 </div>
                 <div className="flex flex-col w-full">
                     <p>Name</p>
-                    <input className="border border-slate-500 rounded-md h-12" onChange={e=>{
-                        setName(e.target.value);
+                    <input className="border border-slate-500 rounded-md h-12 text-black" onChange={e=>{
+                        
                         console.log(e.target.value);
                     }}/>
                 </div>
                 <div className="flex flex-col w-full">
                     <p>Password</p>
-                    <input className="border border-slate-500 rounded-md h-12" type='password' onChange={e=>{
+                    <input className="border border-slate-500 rounded-md h-12 text-black" type='password' onChange={e=>{
                         setPassword(e.target.value);
                         console.log(e.target.value);
                     }}/>

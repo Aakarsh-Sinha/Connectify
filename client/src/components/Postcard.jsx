@@ -1,5 +1,5 @@
 import React from 'react';
-import beach from '../assets/images/beach.jpg'
+
 function Postcard({post}){
     return(
         <div className="flex flex-col border-t border-gray-500">
@@ -11,7 +11,7 @@ function Postcard({post}){
             {post.username}
             </div>
            <div className="p-[1vw]">
-                <img src={beach} alt={"unable to load post"}/>
+                <img src={post.image} alt={"unable to load post"}/>
            </div>
            <div className="p-[1vw]">{post.caption}</div>
            <div className="flex flex-row p-[0.5vw] justify-around">

@@ -34,6 +34,8 @@ function Post(){
 
     return(
         <div className="grid grid-cols-1 place-items-center gap-5">
+            <div className="text-4xl font-bold bg-gradient-to-br from-purple-500 to-indigo-500 text-purple p-[1vw] bg-clip-text text-transparent custom-950:hidden">Connectify</div>
+            <div className="custom-950:block text-2xl font-bold">My Feed</div>
             {posts.length>0 ?(posts.map(post => (
                 <Postcard post={post}/>
             ))):<div>Your friends have not posted</div>}

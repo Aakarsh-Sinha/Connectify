@@ -1,29 +1,26 @@
-import React from 'react';
+import React from 'react'
 import Sidebarcomp from './Sidebarcomp';
-import { useNavigate } from "react-router-dom";
-function Sidebar({setActive}) {
-    
+import { useNavigate } from 'react-router-dom';
+function Bottombar({setActive}) {
     const navigate=useNavigate();
     const profile=async()=>{
         navigate(`/Personalprofile`);
     };
-    const messages=async()=>{
-        navigate('/Messages');
+    const message=async()=>{
+      navigate('/Messages');
     }
     return (
-    <>
-        <div className="hidden custom-950:flex p-[2vw] h-[100vh] w-[25vw] flex-col fixed">
-            <div className="text-4xl font-bold bg-gradient-to-br from-purple-500 to-indigo-500 text-purple p-[1vw] bg-clip-text text-transparent">Connectify</div>
+      <>
+        <div className='h-[10vh] w-full flex justify-between items-center p-[2.5vw] fixed bottom-0 bg-black custom-950:hidden'>
             <Sidebarcomp title={"Home"} icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
             <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
             </svg>} setActive={setActive}/>
-            <div className="flex justify-between items-center p-[1.7vw]"onClick={messages}>
+            <div className="flex justify-between items-center p-[1.7vw]"onClick={message}>
                 <div className="w-[15%]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
-                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-                    </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
+                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                </svg>
                 </div>
-                <div className="w-[85%] justify-start">Messages</div>
             </div>
             <Sidebarcomp title={"Add Friends"} icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -45,16 +42,10 @@ function Sidebar({setActive}) {
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                     </svg>
                 </div>
-                <div className="w-[85%] justify-start">My Profile</div>
             </div>
-            <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={() => {
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("userId");
-                            navigate("/Signin");
-                        }}>Sign-Out</button>
         </div>
-    </>
+      </>
     );
-}
-
-export default Sidebar;
+  }
+  
+  export default Bottombar;
