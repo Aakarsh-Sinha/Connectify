@@ -391,7 +391,7 @@ router.get('/messages',authMiddleware, async (req,res)=>{
     }
 });
 
-router.post('/sendmessage',authMiddleware,async (req,res)=>{
+/*router.post('/sendmessage',authMiddleware,async (req,res)=>{
     try{
         const userId=req.headers.userid;
         const friendId=req.body.friendId;
@@ -409,7 +409,7 @@ router.post('/sendmessage',authMiddleware,async (req,res)=>{
     }catch(error){
         return res.status(500).json(error);
     }
-})
+})*/
 
 
 export default router;
