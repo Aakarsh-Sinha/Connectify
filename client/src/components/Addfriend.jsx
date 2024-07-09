@@ -32,10 +32,10 @@ function Addfriend(){
     if(error){
         return <div>{error}</div>
     }
-    return <div className="p-[2vw]">
-        <h1 className='font-bold text-3xl p-[1vw] '>Search for people:</h1>
-        <div className='p-[1vw]'>
-            <input className='w-[50%] h-[3vw] bg-gray-600 rounded-xl' placeholder='Search....'/>
+    return <div className="p-4">
+        <h1 className='font-bold text-3xl p-2 '>Search for people:</h1>
+        <div className='p-2'>
+            <input className='w-[100%] bg-gray-600 rounded-xl p-2' placeholder='Search....'/>
         </div>
         <div className='grid grid-cols-1 gap-5'>
             {users.map(user => (

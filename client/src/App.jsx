@@ -1,7 +1,6 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './index.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./assets/styles/index.css";
 function App() {
   return (<div className='w-[100vw] h-[100vh] flex flex-row bg-gradient-to-r from-black via-indigo-1000 to-indigo-700'>
 

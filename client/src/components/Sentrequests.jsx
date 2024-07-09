@@ -26,19 +26,25 @@ function Sentrequests() {
     return <div>{error}</div>
   }
   return (
-    <div className="p-[2vw]">
-      <div className=" text-3xl font-bold">Pending Sent Requests</div>
-        <div className='grid grid-cols-1 gap-5'>
-        {username.length > 0 ? (
-          username.map((username, index) => (
-            <div key={index}>{username}</div>
-          ))
-        ) : (
-          <div>No pending sent requests</div>
-        )}
-        </div>
+    <div className='flex flex-col p-8 custom-950:p-0'>
+    <div className="p-[2vw] text-3xl font-bold">Outgoing requests</div>
+    <div className="grid grid-cols-1 p-[2vw] gap-5">
+    {username.length > 0 ? (
+    username.map((user) => (
+      <div className=" flex justify-between w-[100%] font-bold text-xl items-center align-center">
+      <div className='flex items-center'>
+          <div className='mr-4 justify-around flex items-center align-center rounded-full border-2 border-gray-500 w-16 h-16'><img className='rounded-full' src={user.pfp}/></div>
+          <div>{user.username}</div>
+      </div>
+      <div className='flex items-center align-center'>
+      </div>
     </div>
-  );
+    ))
+  ) : (
+    <div>You have no pending outgoing requests</div>
+  )}
+    </div>
+  </div>);
 }
 
 export default Sentrequests;

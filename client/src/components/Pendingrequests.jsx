@@ -59,12 +59,16 @@ function Pendingrequests() {
   }
   return (
     <div className='flex flex-col'>
-      <div className="p-[2vw] text-3xl font-bold">Pending Requests</div>
-      <div className="grid grid-cols-1 p-[2vw] gap-5">
+      <div className="p-8 text-3xl font-bold">Pending Requests</div>
+      <div className="grid grid-cols-1 p-4 gap-5">
       {requests.length > 0 ? (
           requests.map((user) => (
-            <div className="p-[1vw] flex justify-between w-[60%]">
-            <div>{user.username}</div>
+            <div className="p-4 flex justify-between w-[100%] items-center">
+            <div className='flex items-center'>
+               <div><img src={user.pfp} className='rounded-full h-16 w-16'/></div>
+               <div className='ml-4'>{user.username}</div>
+            </div>
+           
             <div>
             <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={() => acceptreq(user.userId)}>{button}</button>
             </div>
