@@ -177,20 +177,25 @@ function Personalprofile() {
             </div>
             {create && <Createpost setCreate={setCreate} />}
             {showCropper && (
-                <div className="crop-container flex flex-col w-[100vw]">
-                    <Cropper
-                        image={image}
-                        crop={crop}
-                        zoom={zoom}
-                        aspect={1}
-                        onCropChange={setCrop}
-                        onCropComplete={onCropComplete}
-                        onZoomChange={setZoom}
-                    />
-                    <button onClick={showCroppedImage}>Crop Image</button>
-                    <button onClick={() => setShowCropper(false)} className='w-[30vw] h-[20vh]'>Close</button>
-                </div>
-            )}
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center">
+            <div className="w-full mb-4" style={{ maxWidth: '400px' }}>
+                <Cropper
+                    image={image}
+                    crop={crop}
+                    zoom={zoom}
+                    aspect={1}
+                    onCropChange={setCrop}
+                    onCropComplete={onCropComplete}
+                    onZoomChange={setZoom}
+                />
+            </div>
+            <button onClick={showCroppedImage} className="fixed top-60 left-40 mb-2 px-4 py-2 bg-blue-500 text-white rounded">Crop Image</button>
+            <button onClick={() => setShowCropper(false)} className="px-4 py-2 bg-red-500 text-white rounded">Close</button>
+        </div>
+    </div>
+)}
+
         </>
     );
 }
