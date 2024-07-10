@@ -19,6 +19,7 @@ const signupbody = zod.object({
   username: zod.string(),
 });
 
+//post/get-> localhost:5000/api/user/signup
 router.post("/signup", async (req, res) => {
   try {
     const { success } = signupbody.safeParse(req.body);
@@ -152,6 +153,15 @@ router.get("/getusers", async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+router.get('/getprofile',async(req,res)=>{
+  try{
+    const userId=req.headers.userid;
+    const user=await userModel.findOne({_id:userId});
+    return res.status(200).json(user);
+  }catch(error){
+    return res.status(411).json(error);
+  }
+})
 router.get("/getposts", authMiddleware, async (req, res) => {
   try {
     const userId = req.headers.userid;
@@ -198,24 +208,27 @@ router.get("/userposts", authMiddleware, async (req, res) => {
 router.get("/sentrequests", async (req, res) => {
   try {
     const userId = req.headers.userid;
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
     const requests = await requestsModel
-      .find({ requests: userId })
-      .populate("requests", "username");
+      .find({ "requests": userId })
+      .populate("userId", "username pfp");
 
-    const usernames = requests
-      .map((request) => request.requests.map((user) => user.username))
-      .flat();
+    const users = requests.map(request => ({
+      username: request.userId.username,
+      pfp: request.userId.pfp
+    }));
 
-    return res.status(200).json(usernames);
+    return res.status(200).json(users);
   } catch (error) {
-    return res.status(500).json({
-      message: "Error",
-    });
+    console.error(error);
+    return res.status(500).json({ message: "Error" });
   }
 });
-router.get("/test", async (req, res) => {
-  return res.status(200).json({ message: "hello" });
-});
+
+
 
 router.get("/issent", authMiddleware, async (req, res) => {
   try {
@@ -278,6 +291,53 @@ router.post("/sendrequest", authMiddleware, async (req, res) => {
     });
   }
 });
+
+router.get('/getpfp', async (req, res) => {
+  try {
+    const { userId } = req.query; // Use req.query to get query parameters
+    console.log("hi");
+    console.log(userId);
+    
+    const user = await userModel.findOne({ _id: userId }); // Ensure you are searching by the correct field
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    const pfp = user.pfp;
+    console.log(pfp);
+    
+    return res.status(200).json(pfp);
+  } catch (error) {
+    console.error("Error fetching profile picture:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+router.post('/pfp', async (req, res) => {
+  const { pfp } = req.body;
+  const userId=req.headers.userid;
+  console.log(userId);
+  console.log(pfp);
+  if (!userId || !pfp) {
+      return res.status(400).json({ message: 'User ID and profile picture are required' });
+  }
+
+  try {
+      const user = await userModel.findByIdAndUpdate(
+          userId,
+          { pfp: pfp }
+      );
+
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.status(200).json({ message: 'Profile picture updated successfully', user });
+  } catch (error) {
+      res.status(500).json({ message: 'Server error', error });
+  }
+});
 router.get("/getfriends", authMiddleware, async (req, res) => {
   try {
     const userId = req.headers.userid;
@@ -285,7 +345,7 @@ router.get("/getfriends", authMiddleware, async (req, res) => {
       .findOne({
         userId: userId,
       })
-      .populate("friends", "username _id");
+      .populate("friends", "username _id pfp");
     if (!friends) {
       return res.status(200).json({
         message: "You have no friends",
@@ -294,6 +354,7 @@ router.get("/getfriends", authMiddleware, async (req, res) => {
     const friendDetails = friends.friends.map((user) => ({
       userId: user._id,
       username: user.username,
+      pfp:user.pfp
     }));
     return res.status(200).json(friendDetails);
   } catch (error) {
@@ -325,10 +386,11 @@ router.get("/receivedrequests", async (req, res) => {
     const userId = req.headers.userid;
     const userRequests = await requestsModel
       .findOne({ userId: userId })
-      .populate("requests", "username _id");
+      .populate("requests", "username _id pfp");
     const userDetails = userRequests.requests.map((user) => ({
       userId: user._id,
       username: user.username,
+      pfp:user.pfp
     }));
     return res.status(200).json(userDetails);
   } catch (error) {

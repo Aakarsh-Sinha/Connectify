@@ -4,9 +4,11 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/like/:postId", authMiddleware, async (req, res) => {
+router.post("/like/:postId", async (req, res) => {
   const { postId } = req.params;
-  const userId = req.user.userId;
+  const userId = req.headers.userid;
+  console.log(postId);
+  console.log(userId);
 
   try {
     const result = await likePost(postId, userId);

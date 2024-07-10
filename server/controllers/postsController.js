@@ -92,12 +92,12 @@ export const likePost = async (postId, userId) => {
       (like) => like.userId.toString() === userId
     );
     if (alreadyLiked) {
-      throw new Error("User already liked the post");
+      post.likes--;
+      post.likedBy = post.likedBy.filter(like => like.userId.toString() !== userId);
+    }else{
+      post.likes++;
+      post.likedBy.push({ userId: userId });
     }
-
-    // Add user's like to the post
-    post.likes++;
-    post.likedBy.push({ userId: userId });
     await post.save();
 
     return { message: "Post liked successfully", post };
