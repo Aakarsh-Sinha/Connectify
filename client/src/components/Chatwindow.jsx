@@ -3,7 +3,7 @@ import MessageBubble from "./MessageBubble";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-function Chatwindow({ active }) {
+function ChatWindow({ active }) {
   const [messages, setMessages] = useState([]);
   const [sendmsg, setSendmsg] = useState("");
   const socketRef = useRef();
@@ -115,7 +115,7 @@ function Chatwindow({ active }) {
       </div>
       <div
         id="messages-container"
-        className="flex gap-5 h-[90%] flex-col-reverse px-[2vw] overflow-y-auto"
+        className="flex flex-col gap-5 h-[90%] px-[2vw] overflow-y-auto"
       >
         {messages.length === 0 ? (
           <div>No messages found</div>
@@ -166,4 +166,4 @@ function Chatwindow({ active }) {
   );
 }
 
-export default Chatwindow;
+export default ChatWindow;

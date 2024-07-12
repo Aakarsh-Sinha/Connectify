@@ -10,3 +10,4 @@ router.use("/comments", commentsRouter);
 router.use("/posts", postsRouter);
 
 export default router;
+
