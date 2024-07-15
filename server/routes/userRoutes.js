@@ -153,6 +153,25 @@ router.get("/getusers", async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+router.get('/searchuser', async (req, res) => {
+  const searchQuery = req.query.search; // Get the search query from the request
+
+  if (!searchQuery) {
+    return res.status(400).json({ message: 'Search query is required' });
+  }
+
+  try {
+    const users = await userModel.find({
+      $or: [
+        { username: { $regex: new RegExp(searchQuery, 'i') } }
+      ]
+    });
+
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 router.get('/getprofile',async(req,res)=>{
   try{
     const userId=req.headers.userid;
@@ -294,11 +313,11 @@ router.post("/sendrequest", authMiddleware, async (req, res) => {
 
 router.get('/getpfp', async (req, res) => {
   try {
-    const { userId } = req.query; // Use req.query to get query parameters
+    const { userId } = req.query; 
     console.log("hi");
     console.log(userId);
     
-    const user = await userModel.findOne({ _id: userId }); // Ensure you are searching by the correct field
+    const user = await userModel.findOne({ _id: userId }); 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
