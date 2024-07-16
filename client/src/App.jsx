@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./assets/styles/index.css";
 function App() {
-  return (<div className='w-[100vw] h-[100vh] flex flex-row bg-gradient-to-r from-black via-indigo-1000 to-indigo-700'>
+  return (<div className='w-[100vw] h-[100vh] items-center justify-around  flex flex-col bg-gradient-to-r from-black via-indigo-1000 to-indigo-700'>
 
 
-      <div className="flex w-[50%] flex-col p-[2vw] justify-center">
+      <div className="flex flex-col gap-10 w-full p-8 items-center justify-between custom-950:w-[50%]">
             <div className="text-7xl font-bold bg-gradient-to-br from-purple-500 to-indigo-500 text-purple p-[2vw] bg-clip-text text-transparent flex justify-center">Connectify</div>
-            <div className='flex items-center justify-center font-semibold text-xl p-[1vw] tracking-wider text-center'>
+            <div className='flex items-center justify-center font-semibold text-xl tracking-wider text-center'>
            Stay in touch with real-time messaging, explore trending topics, and express yourself with posts, photos, and videos. Join Connectify today and be part of a vibrant, interactive community!
             </div>
             <div className="flex justify-center items-center p-[3vw]">

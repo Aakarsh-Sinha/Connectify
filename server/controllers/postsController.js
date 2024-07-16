@@ -94,14 +94,32 @@ export const likePost = async (postId, userId) => {
     if (alreadyLiked) {
       post.likes--;
       post.likedBy = post.likedBy.filter(like => like.userId.toString() !== userId);
-    }else{
+    } else {
       post.likes++;
       post.likedBy.push({ userId: userId });
     }
     await post.save();
 
-    return { message: "Post liked successfully", post };
+    return { message: "Post liked successfully", post, liked: !alreadyLiked };
   } catch (error) {
     throw new Error(`Error liking post: ${error.message}`);
+  }
+};
+
+// Function to check if a post is liked by the user
+export const isPostLikedByUser = async (postId, userId) => {
+  try {
+    const post = await postsModel.findById(postId);
+    if (!post) {
+      throw new Error("Post not found");
+    }
+
+    const liked = post.likedBy.some(
+      (like) => like.userId.toString() === userId
+    );
+
+    return liked;
+  } catch (error) {
+    throw new Error(`Error checking like status: ${error.message}`);
   }
 };
