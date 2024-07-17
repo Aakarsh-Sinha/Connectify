@@ -1,10 +1,10 @@
 import React from "react";
-import Sidebarcomp from "./SidebarComponent";
+import SidebarComponent from "./SidebarComponent";
 import { useNavigate } from "react-router-dom";
 function BottomBar({ setActive }) {
   const navigate = useNavigate();
   const profile = async () => {
-    navigate(`/Personalprofile`);
+    navigate(`/PersonalProfile`);
   };
   const message = async () => {
     navigate("/Messages");
@@ -12,7 +12,7 @@ function BottomBar({ setActive }) {
   return (
     <>
       <div className="h-[10vh] w-full flex justify-between items-center p-[2.5vw] fixed bottom-0 bg-black custom-950:hidden">
-        <Sidebarcomp
+        <SidebarComponent
           title={"Home"}
           icon={
             <svg
@@ -45,7 +45,7 @@ function BottomBar({ setActive }) {
             </svg>
           </div>
         </div>
-        <Sidebarcomp
+        <SidebarComponent
           title={"Add Friends"}
           icon={
             <svg
@@ -61,7 +61,7 @@ function BottomBar({ setActive }) {
           }
           setActive={setActive}
         />
-        <Sidebarcomp
+        <SidebarComponent
           title={"Sent Requests"}
           icon={
             <svg
@@ -78,7 +78,7 @@ function BottomBar({ setActive }) {
           }
           setActive={setActive}
         />
-        <Sidebarcomp
+        <SidebarComponent
           title={"Pending Requests"}
           icon={
             <svg
@@ -95,7 +95,7 @@ function BottomBar({ setActive }) {
           }
           setActive={setActive}
         />
-        <Sidebarcomp
+        <SidebarComponent
           title={"My Friends"}
           icon={
             <svg

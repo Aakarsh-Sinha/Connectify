@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-function Pendingrequests() {
+function PendingRequests() {
   const [requests,setRequests]=useState("");
   const [button,setButton]=useState("Accept");
   const [error,setError]=useState("");
@@ -82,4 +82,4 @@ function Pendingrequests() {
   );
 }
 
-export default Pendingrequests;
+export default PendingRequests;

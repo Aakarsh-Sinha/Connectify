@@ -64,7 +64,7 @@ function ChatWindow({ active }) {
       const userId = localStorage.getItem("userId");
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:5000/api/user/messages",
+        "http://localhost:5000/api/messages/getmessages",
         {
           headers: {
             Authorization: `Bearer ${token}`,

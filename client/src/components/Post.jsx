@@ -11,7 +11,7 @@ function Post() {
         const token = localStorage.getItem("token");
         const userId = localStorage.getItem("userId");
         const response = await axios.get(
-          "http://localhost:5000/api/user/getposts",
+          "http://localhost:5000/api/posts/getposts",
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -63,7 +63,7 @@ function PersonalProfile() {
         const userId = localStorage.getItem("userId");
 
         const response = await axios.get(
-          "http://localhost:5000/api/user/userposts",
+          "http://localhost:5000/api/posts/userposts",
           {
             params: { userId },
             headers: {

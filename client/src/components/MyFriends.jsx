@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-function Myfriends(){
+function MyFriends(){
     const navigate=useNavigate();
     const [friends,setFriends]=useState([]);
     const [error,setError]=useState("");
@@ -62,4 +62,4 @@ function Myfriends(){
       );
 }
 
-export default Myfriends;
+export default MyFriends;
