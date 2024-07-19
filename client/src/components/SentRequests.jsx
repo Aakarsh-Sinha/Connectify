@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
-function Sentrequests() {
+function SentRequests() {
   const [username,setUsername]=useState(["No pending sent requests"]);
   const [error,setError]=useState("");
   useEffect(()=>{
@@ -47,4 +47,4 @@ function Sentrequests() {
   </div>);
 }
 
-export default Sentrequests;
+export default SentRequests;

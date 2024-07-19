@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Profiletile from './Profiletile';
+import Profiletile from './ProfileTile';
 import axios from 'axios';
 
-function Addfriend() {
+function AddFriend() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -99,4 +99,4 @@ function Addfriend() {
   )
 }
 
-export default Addfriend;
+export default AddFriend;

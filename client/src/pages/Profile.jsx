@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import PostCard from "../components/PostCard";
 import axios from "axios";
-import Postcard from "../components/Postcard";
-
 function Profile() {
   const [searchParams] = useSearchParams();
   const [posts, setPosts] = useState([]);
@@ -75,7 +75,7 @@ function Profile() {
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-center justify-items-center">
           {posts.length > 0 ? (
             posts.map((post) => (
-              <Postcard key={post._id} post={post} />
+              <PostCard key={post._id} post={post} />
             ))
           ) : (
             <div className="font-bold text-2xl col-span-3 row-span-10">This user has not posted...</div>

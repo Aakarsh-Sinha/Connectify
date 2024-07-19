@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Comments from './Comments';
 
-function Postcard({ post }) {
+function PostCard({ post }) {
   const [likes, setLikes] = useState(post.likes);
   const [liked, setLiked] = useState(false); // Add state to track if the post is liked
   const [showComments, setShowComments] = useState(false);
@@ -114,4 +114,4 @@ function Postcard({ post }) {
   );
 }
 
-export default Postcard;
+export default PostCard;

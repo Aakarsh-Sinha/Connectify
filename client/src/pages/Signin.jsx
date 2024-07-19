@@ -49,7 +49,7 @@ function Signin(){
                     }}>Sign In</button>                    
                 </div>
                 <div className="py-4 flex justify-around">
-                    <div>Don't have an account? <Link to="/Signup">Sign Up</Link></div></div>
+                    <div>Don't have an account? <Link to="/signup">Sign Up</Link></div></div>
 
                 
             </div>

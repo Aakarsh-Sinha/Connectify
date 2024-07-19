@@ -1,11 +1,15 @@
 import express from "express";
-import { likePost, isPostLikedByUser } from "../controllers/postsController.js";
+import {
+  createpost,
+  getposts,
+  userposts,
+  likePost, isPostLikedByUser,
+} from "../controllers/postsController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
-import { postsModel } from "../models/postsModel.js";
 
 const router = express.Router();
 
-router.post("/like/:postId", async (req, res) => {
+router.post("/like/:postId", authMiddleware, async (req, res) => {
   const { postId } = req.params;
   const userId = req.headers.userid;
 
@@ -29,5 +33,9 @@ router.get("/liked/:postId", async (req, res) => {
   }
 });
 
+
+router.post("/createpost", authMiddleware, createpost);
+router.get("/getposts", authMiddleware, getposts);
+router.get("/userposts", authMiddleware, userposts);
 
 export default router;

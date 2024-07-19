@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-function Createpost({setCreate}){
+function CreatePost({setCreate}){
     const [image, setImage] = useState("");
     const [caption, setCaption] = useState("");
     const onFileChange = (e) => {
@@ -20,7 +20,7 @@ function Createpost({setCreate}){
             const token = localStorage.getItem("token");
             const userId = localStorage.getItem("userId");
 
-            const response = await axios.post('http://localhost:5000/api/user/createpost', {
+            const response = await axios.post('http://localhost:5000/api/posts/createpost', {
                 base64: image,
                 caption: caption
             }, {
@@ -59,4 +59,4 @@ function Createpost({setCreate}){
 </div>
 }
 
-export default Createpost;
+export default CreatePost;
