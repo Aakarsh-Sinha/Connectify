@@ -1,5 +1,6 @@
 import express from "express";
 import { authMiddleware } from "../middleware/authMiddleware.js";
+import { userModel } from "../models/userModel.js";
 import {
   signup,
   signin,
@@ -16,7 +17,25 @@ import {
 } from "../controllers/userController.js";
 
 const router = express.Router();
+router.get('/searchuser', async (req, res) => {
+  const searchQuery = req.query.search; // Get the search query from the request
 
+  if (!searchQuery) {
+    return res.status(400).json({ message: 'Search query is required' });
+  }
+
+  try {
+    const users = await userModel.find({
+      $or: [
+        { username: { $regex: new RegExp(searchQuery, 'i') } }
+      ]
+    });
+
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 router.post("/signup", signup);
 router.post("/signin", signin);
 router.get("/getusers", authMiddleware, getusers);
@@ -25,7 +44,7 @@ router.get("/getpfp", authMiddleware, getpfp);
 router.put("/updatepfp", authMiddleware, updatepfp);
 router.get("/getfriends", authMiddleware, getfriends);
 router.get("/isfriend", authMiddleware, isfriend);
-router.get("/sentrequests", authMiddleware, sentrequests);
+router.get("/sentrequests", sentrequests);
 router.get("/issent", authMiddleware, issent);
 router.get("/receivedrequests", authMiddleware, receivedrequests);
 router.post("/acceptrequest", authMiddleware, acceptrequest);

@@ -18,7 +18,7 @@ function Profile() {
         const userId = searchParams.get("userId");
 
         const response = await axios.get(
-          "http://localhost:5000/api/user/userposts",
+          "http://localhost:5000/api/posts/userposts",
           {
             params: { userId },
             headers: {
