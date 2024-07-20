@@ -14,28 +14,11 @@ import {
   issent,
   receivedrequests,
   acceptrequest,
+  searchuser,
 } from "../controllers/userController.js";
 
 const router = express.Router();
-router.get('/searchuser', async (req, res) => {
-  const searchQuery = req.query.search; // Get the search query from the request
 
-  if (!searchQuery) {
-    return res.status(400).json({ message: 'Search query is required' });
-  }
-
-  try {
-    const users = await userModel.find({
-      $or: [
-        { username: { $regex: new RegExp(searchQuery, 'i') } }
-      ]
-    });
-
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
 router.post("/signup", signup);
 router.post("/signin", signin);
 router.get("/getusers", authMiddleware, getusers);
@@ -48,6 +31,7 @@ router.get("/sentrequests", sentrequests);
 router.get("/issent", authMiddleware, issent);
 router.get("/receivedrequests", authMiddleware, receivedrequests);
 router.post("/acceptrequest", authMiddleware, acceptrequest);
+router.get("/searchuser", searchuser);
 
 export default router;
 

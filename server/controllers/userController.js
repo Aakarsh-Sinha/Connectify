@@ -240,3 +240,21 @@ export const acceptrequest = async (req, res) => {
     res.status(500).json({ message: "Error accepting request" });
   }
 };
+
+export const searchuser = async (req, res) => {
+  const searchQuery = req.query.search; // Get the search query from the request
+
+  if (!searchQuery) {
+    return res.status(400).json({ message: "Search query is required" });
+  }
+
+  try {
+    const users = await userModel.find({
+      $or: [{ username: { $regex: new RegExp(searchQuery, "i") } }],
+    });
+
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
