@@ -16,6 +16,7 @@ import {
   acceptrequest,
   sendrequest,
   searchuser,
+  deleteUser,
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -34,6 +35,7 @@ router.get("/receivedrequests", authMiddleware, receivedrequests);
 router.post("/acceptrequest", authMiddleware, acceptrequest);
 router.post("/sendrequest", authMiddleware, sendrequest);
 router.get("/searchuser", searchuser);
+router.delete("/delete/:id", authMiddleware, deleteUser);
 
 export default router;
 
