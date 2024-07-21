@@ -1,38 +1,40 @@
 import React from "react";
 import axios from "axios";
 
-const DeleteUserButton = () => {
+const DeleteUserButton = ({ userId }) => {
   const handleDeleteUser = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+    if (!confirmDelete) return;
+
     try {
-      const userId = localStorage.getItem("userId");
       const token = localStorage.getItem("token");
-
-      const response = await axios.delete(
-        `http://localhost:5000/api/users/delete/${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        alert("User deleted successfully");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-      }
+      await axios.delete(`http://localhost:5000/api/user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("User account deleted successfully.");
+      localStorage.clear();
+      window.location.href = "/login";
     } catch (error) {
       console.error("Error deleting user:", error);
-      alert("Error deleting user");
+      alert("There was an error deleting your account. Please try again.");
     }
   };
 
   return (
     <button
       onClick={handleDeleteUser}
-      className="bg-red-500 text-white p-2 rounded"
+      style={{
+        fontSize: "10px",
+        padding: "2px 4px",
+        border: "1px solid red",
+        borderRadius: "3px",
+        color: "red",
+        backgroundColor: "transparent",
+      }}
     >
       Delete Account
     </button>

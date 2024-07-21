@@ -3,6 +3,7 @@ import axios from "axios";
 import Cropper from "react-easy-crop";
 import PostCard from "../components/PostCard";
 import CreatePost from "../components/CreatePost";
+import DeleteUserButton from "../components/DeleteUserButton"; // Import the DeleteUserButton
 
 function PersonalProfile() {
   const [posts, setPosts] = useState([]);
@@ -18,6 +19,7 @@ function PersonalProfile() {
   const [croppedImage, setCroppedImage] = useState(null);
   const [showCropper, setShowCropper] = useState(false);
   const [create, setCreate] = useState(false);
+
   const getCroppedImg = async (imageSrc, crop) => {
     const image = new Image();
     image.src = imageSrc;
@@ -146,7 +148,7 @@ function PersonalProfile() {
   return (
     <>
       <div className="px-1 pt-6 flex justify-around flex-col items-center md:px-[10vw] custom-950:pt-[3vw]">
-        <div className="w-[100%] flex justify-around text-xl pb-8  border-1 border-b border-white p-1 mb-8 custom-950:w-[60%] custom-950:text-xl ">
+        <div className="w-[100%] flex justify-between text-xl pb-8 border-1 border-b border-white p-1 mb-8 custom-950:w-[60%] custom-950:text-xl relative">
           <div className="rounded-full w-32 h-32 flex flex-col align-center items-center">
             <div className="border-2 border-solid rounded-full border-white w-32 h-32 flex items-center justify-center">
               {croppedImage ? (
@@ -195,6 +197,9 @@ function PersonalProfile() {
             >
               Create a Post
             </button>
+          </div>
+          <div style={{ position: "absolute", top: "0", right: "0" }}>
+            <DeleteUserButton userId={localStorage.getItem("userId")} />
           </div>
         </div>
         <div className="w-[70%] flex justify-around p-[1vw] font-bold text-2xl">
