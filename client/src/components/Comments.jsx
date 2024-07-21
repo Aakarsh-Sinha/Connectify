@@ -1,46 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 function Comments({ showComments, setShowComments, post }) {
   const [comments, setComments] = useState([]);
-  const [commentText, setCommentText] = useState('');
+  const [commentText, setCommentText] = useState("");
+
+  const fetchComments = useCallback(async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
+      const response = await axios.get(
+        `http://localhost:5000/api/comments/${post._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            userId: userId,
+          },
+        }
+      );
+      setComments(response.data);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  }, [post._id]);
 
   useEffect(() => {
     if (showComments) {
       fetchComments();
     }
-  }, [showComments,comments]);
-
-  const fetchComments = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('userId');
-      const response = await axios.get(`http://localhost:5000/api/comments/${post._id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          userId: userId,
-        }
-      });
-      setComments(response.data);
-    } catch (error) {
-      console.error("Error fetching comments:", error);
-    }
-  };
+  }, [showComments, fetchComments]);
 
   const handleAddComment = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('userId');
-      const response = await axios.post(`http://localhost:5000/api/comments/${post._id}`, { text: commentText }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          userId: userId,
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
+      const response = await axios.post(
+        `http://localhost:5000/api/comments/${post._id}`,
+        { text: commentText },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            userId: userId,
+          },
         }
-      });
-      setComments([...comments, response.data.comments]);
-      setCommentText('');
+      );
+      setComments([...comments, response.data.comment]);
+      setCommentText("");
     } catch (error) {
       console.error("Error adding comment:", error);
     }
@@ -51,7 +58,10 @@ function Comments({ showComments, setShowComments, post }) {
       <div className="bg-black rounded-lg shadow-lg p-4 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">Comments</h2>
-          <button onClick={() => setShowComments(false)} className="text-gray-500 hover:text-gray-700">
+          <button
+            onClick={() => setShowComments(false)}
+            className="text-gray-500 hover:text-gray-700"
+          >
             Close
           </button>
         </div>
@@ -71,7 +81,10 @@ function Comments({ showComments, setShowComments, post }) {
             placeholder="Add a comment"
             className="border border-gray-300 rounded p-2 w-full"
           />
-          <button onClick={handleAddComment} className="bg-blue-500 text-white p-2 rounded mt-2 w-full">
+          <button
+            onClick={handleAddComment}
+            className="bg-blue-500 text-white p-2 rounded mt-2 w-full"
+          >
             Comment
           </button>
         </div>

@@ -14,6 +14,7 @@ import {
   issent,
   receivedrequests,
   acceptrequest,
+  sendrequest,
   searchuser,
 } from "../controllers/userController.js";
 
@@ -31,6 +32,7 @@ router.get("/sentrequests", sentrequests);
 router.get("/issent", authMiddleware, issent);
 router.get("/receivedrequests", authMiddleware, receivedrequests);
 router.post("/acceptrequest", authMiddleware, acceptrequest);
+router.post("/sendrequest", authMiddleware, sendrequest);
 router.get("/searchuser", searchuser);
 
 export default router;
@@ -286,46 +288,7 @@ export default router;
 //   }
 // });
 
-// router.post("/sendrequest", authMiddleware, async (req, res) => {
-//   try {
-//     const userId = req.headers["userid"];
-//     const { to } = req.body;
-//     console.log(to);
-//     const existingRequest = await requestsModel.findOne({
-//       userId: to,
-//       requests: userId,
-//     });
-
-//     const reqalr = await requestsModel.findOne({
-//       userId: userId,
-//       requests: to,
-//     });
-//     if (reqalr) {
-//       return res.status(200).json({
-//         message: "Alreadysent",
-//       });
-//     }
-
-//     if (existingRequest) {
-//       return res.status(400).json({
-//         message: "Request already sent",
-//       });
-//     }
-
-//     console.log("hello");
-//     await requestsModel.updateOne(
-//       { userId: to },
-//       { $push: { requests: userId } }
-//     );
-//     return res.status(200).json({
-//       message: "request sent successfully",
-//     });
-//   } catch (error) {
-//     return res.json({
-//       message: error,
-//     });
-//   }
-// });
+//
 
 // router.get('/getpfp', async (req, res) => {
 //   try {

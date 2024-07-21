@@ -63,7 +63,7 @@ function Signup() {
         ) : null}
         <button
           type="button"
-          class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 rounded-lg text-center dark:bg-purple-600 dark:hover:bg-blue-700 dark:focus:ring-purple-800"
+          className="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 rounded-lg text-center dark:bg-purple-600 dark:hover:bg-blue-700 dark:focus:ring-purple-800"
           onClick={async () => {
             try {
               const response = await axios.post(

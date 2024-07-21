@@ -209,6 +209,47 @@ export const receivedrequests = async (req, res) => {
   }
 };
 
+export const sendrequest = async (req, res) => {
+  try {
+    const userId = req.headers["userid"];
+    const { to } = req.body;
+    console.log(to);
+    const existingRequest = await requestsModel.findOne({
+      userId: to,
+      requests: userId,
+    });
+
+    const reqalr = await requestsModel.findOne({
+      userId: userId,
+      requests: to,
+    });
+    if (reqalr) {
+      return res.status(200).json({
+        message: "Alreadysent",
+      });
+    }
+
+    if (existingRequest) {
+      return res.status(400).json({
+        message: "Request already sent",
+      });
+    }
+
+    console.log("hello");
+    await requestsModel.updateOne(
+      { userId: to },
+      { $push: { requests: userId } }
+    );
+    return res.status(200).json({
+      message: "request sent successfully",
+    });
+  } catch (error) {
+    return res.json({
+      message: error,
+    });
+  }
+};
+
 export const acceptrequest = async (req, res) => {
   try {
     const userId = req.headers.userid;

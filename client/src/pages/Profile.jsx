@@ -51,9 +51,9 @@ function Profile() {
   return (
     <>
       <div className="px-1 pt-6 flex justify-around flex-col items-center md:px-[10vw] custom-950:pt-[3vw]">
-        <div className='w-[100%] flex justify-around text-xl pb-8 border-1 border-b border-white p-1 mb-8 custom-950:w-[60%] custom-950:text-xl '>
+        <div className="w-[100%] flex justify-around text-xl pb-8 border-1 border-b border-white p-1 mb-8 custom-950:w-[60%] custom-950:text-xl ">
           <div className="rounded-full w-32 h-32 flex flex-col align-center items-center">
-            <div className='border-2 border-solid rounded-full border-white w-32 h-32 flex items-center justify-center'>
+            <div className="border-2 border-solid rounded-full border-white w-32 h-32 flex items-center justify-center">
               {user.pfp ? (
                 <img src={user.pfp} alt="Profile" className="rounded-full" />
               ) : (
@@ -71,14 +71,16 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="w-[70%] flex justify-around p-[1vw] font-bold text-2xl">Posts</div>
+        <div className="w-[70%] flex justify-around p-[1vw] font-bold text-2xl">
+          Posts
+        </div>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-center justify-items-center">
           {posts.length > 0 ? (
-            posts.map((post) => (
-              <PostCard key={post._id} post={post} />
-            ))
+            posts.map((post) => <PostCard key={post._id} post={post} />)
           ) : (
-            <div className="font-bold text-2xl col-span-3 row-span-10">This user has not posted...</div>
+            <div className="font-bold text-2xl col-span-3 row-span-10">
+              This user has not posted...
+            </div>
           )}
         </div>
       </div>
