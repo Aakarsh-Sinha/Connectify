@@ -283,7 +283,7 @@ export const acceptrequest = async (req, res) => {
 };
 
 export const searchuser = async (req, res) => {
-  const searchQuery = req.query.search; // Get the search query from the request
+  const searchQuery = req.query.search;
 
   if (!searchQuery) {
     return res.status(400).json({ message: "Search query is required" });
@@ -304,13 +304,11 @@ export const deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
 
-    // Check if the user exists
     const user = await userModel.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Delete the user
     await userModel.findByIdAndDelete(userId);
 
     res.status(200).json({ message: "User deleted successfully" });

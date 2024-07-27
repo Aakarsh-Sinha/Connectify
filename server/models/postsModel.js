@@ -39,7 +39,7 @@ const postsSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  likedBy: [likeSchema], // Array to store users who liked the post
+  likedBy: [likeSchema],
   caption: {
     type: String,
     required: true,

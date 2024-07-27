@@ -65,7 +65,6 @@ export const userposts = async (req, res) => {
   }
 };
 
-// Function to like a post
 export const likePost = async (postId, userId) => {
   try {
     const post = await postsModel.findById(postId);
@@ -73,13 +72,14 @@ export const likePost = async (postId, userId) => {
       throw new Error("Post not found");
     }
 
-    // Check if the user already liked the post
     const alreadyLiked = post.likedBy.some(
       (like) => like.userId.toString() === userId
     );
     if (alreadyLiked) {
       post.likes--;
-      post.likedBy = post.likedBy.filter(like => like.userId.toString() !== userId);
+      post.likedBy = post.likedBy.filter(
+        (like) => like.userId.toString() !== userId
+      );
     } else {
       post.likes++;
       post.likedBy.push({ userId: userId });
@@ -92,7 +92,6 @@ export const likePost = async (postId, userId) => {
   }
 };
 
-// Function to check if a post is liked by the user
 export const isPostLikedByUser = async (postId, userId) => {
   try {
     const post = await postsModel.findById(postId);

@@ -1,4 +1,3 @@
-// Changed object
 import React from "react";
 
 const MyComponent = ({ name, age }) => {

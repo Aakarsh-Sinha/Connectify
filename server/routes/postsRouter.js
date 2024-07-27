@@ -3,7 +3,8 @@ import {
   createpost,
   getposts,
   userposts,
-  likePost, isPostLikedByUser,
+  likePost,
+  isPostLikedByUser,
 } from "../controllers/postsController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
@@ -32,7 +33,6 @@ router.get("/liked/:postId", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-
 
 router.post("/createpost", authMiddleware, createpost);
 router.get("/getposts", authMiddleware, getposts);
