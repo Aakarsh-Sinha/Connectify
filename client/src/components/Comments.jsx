@@ -80,6 +80,7 @@ function Comments({ showComments, setShowComments, post }) {
             onChange={(e) => setCommentText(e.target.value)}
             placeholder="Add a comment"
             className="border border-gray-300 rounded p-2 w-full"
+            style={{ color: "black" }}
           />
           <button
             onClick={handleAddComment}
