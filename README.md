@@ -17,3 +17,17 @@ You can download the [Solution Architecture](https://github.com/Aakarsh-Sinha/Co
 You can download the [Solution Requirements](https://github.com/Aakarsh-Sinha/Connectify/raw/main/Phase-2/Solution_Requirements.docx) document from the repository.
 
 You can download the [Technology Stack](https://github.com/Aakarsh-Sinha/Connectify/raw/main/Phase-2/Technology_Stack.docx) document from the repository.
+
+## Download the Phase 3 Documents
+
+You can download the [Frontend Development Report](https://github.com/Aakarsh-Sinha/Connectify/raw/main/Phase-3/Frontend%20Development%20Report.docx) document from the repository.
+
+## Download the Phase 4 Documents
+
+You can download the [API Development and Integration Report](https://github.com/Aakarsh-Sinha/Connectify/raw/main/Phase-4/API%20Development%20and%20Integration%20Report%20-%201.0.docx) document from the repository.
+
+You can download the [Database Design and Development Report](https://github.com/Aakarsh-Sinha/Connectify/raw/main/Phase-4/Database%20Design%20and%20Development%20Report.docx) document from the repository.
+
+## Download the Phase 5 Documents
+
+You can download the [User Acceptance Testing FSD](https://github.com/Aakarsh-Sinha/Connectify/raw/main/Phase-5/User%20Acceptance%20Testing%20FSD.docx) document from the repository.
