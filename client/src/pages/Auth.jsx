@@ -4,7 +4,7 @@ import "../assets/styles/index.css";
 
 function Auth() {
   return (
-    <div className="w-[100vw] h-[100vh] items-center justify-around  flex flex-col bg-gradient-to-r from-black via-indigo-1000 to-indigo-700">
+    <div className="w-[100vw] h-[100vh] items-center justify-around flex flex-col bg-gradient-to-r from-black via-indigo-1000 to-indigo-700">
       <div className="flex flex-col gap-10 w-full p-8 items-center justify-between custom-950:w-[50%]">
         <div className="text-7xl font-bold bg-gradient-to-br from-purple-500 to-indigo-500 text-purple p-[2vw] bg-clip-text text-transparent flex justify-center">
           Connectify
@@ -15,18 +15,18 @@ function Auth() {
           and be part of a vibrant, interactive community!
         </div>
         <div className="flex justify-center items-center p-[3vw]">
-          <button
-            type="button"
-            className=" h-[7vh] w-[20vw] text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          <Link
+            to="/Signup"
+            className="h-[7vh] w-[20vw] text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 flex items-center justify-center"
           >
-            <Link to="/Signup">Sign-up</Link>
-          </button>
-          <button
-            type="button"
-            className="h-[7vh] w-[20vw] text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            Sign-up
+          </Link>
+          <Link
+            to="/Signin"
+            className="h-[7vh] w-[20vw] text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 flex items-center justify-center"
           >
-            <Link to="/Signin">Sign-in</Link>
-          </button>
+            Sign-in
+          </Link>
         </div>
       </div>
       <div className="w-[50vw]"></div>
