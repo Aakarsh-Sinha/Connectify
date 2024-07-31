@@ -31,3 +31,11 @@ You can download the [Database Design and Development Report](https://github.com
 ## Download the Phase 5 Documents
 
 You can download the [User Acceptance Testing FSD](https://github.com/Aakarsh-Sinha/Connectify/raw/main/Phase-5/User%20Acceptance%20Testing%20FSD.docx) document from the repository.
+
+## Download the Project Documentation
+
+You can download the [Project Documentation](https://github.com/Aakarsh-Sinha/Connectify/raw/main/Project%20Documentation/Project%20Documentation.docx) document from the repository.
+
+## View the Project Demonstration Video
+
+[View the file on Google Drive](https://drive.google.com/file/d/1QUaWiGP7UsbHi1ArIO2uBFh_O_ooRSWZ/view?usp=sharing)
